@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stream Ad Overlay</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: transparent;
+        font-family: Arial, sans-serif;
+    }
+
+    #adBox {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 12px;
+        font-size: 22px;
+        opacity: 0;
+        transition: all 0.7s ease;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    #adBox.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .highlight {
+        color: #00eaff;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div id="adBox">
+    🔥 Support stream! <span class="highlight">Follow & Tap</span> 💙
+</div>
+
+<script>
+    const ad = document.getElementById("adBox");
+
+    function showAd() {
+        ad.classList.add("show");
+
+        setTimeout(() => {
+            ad.classList.remove("show");
+        }, 5000); // koliko traje reklama (5 sekundi)
+    }
+
+    // koliko često se pojavljuje (na svakih 5 sekundi)
+    setInterval(showAd, 60000);
+
+    // prvi put posle 5 sekundi
+    setTimeout(showAd, 5000);
+</script>
+
+</body>
+</html>
