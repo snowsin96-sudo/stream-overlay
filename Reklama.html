@@ -2,63 +2,84 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Stream Ad Overlay</title>
+<title>Right Slide Ad</title>
+
 <style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        background: transparent;
-        font-family: Arial, sans-serif;
-    }
+body {
+    margin: 0;
+    overflow: hidden;
+    background: transparent;
+    font-family: Arial, sans-serif;
+}
 
-    #adBox {
-        position: absolute;
-        bottom: 50px;
-        left: 50%;
-        transform: translateX(-50%) translateY(100px);
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 15px 30px;
-        border-radius: 12px;
-        font-size: 22px;
-        opacity: 0;
-        transition: all 0.7s ease;
-        box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
+/* Box */
+#adBox {
+    position: absolute;
+    bottom: 60px;
+    right: -400px; /* start van ekrana DESNO */
+    background: rgba(15, 15, 30, 0.9);
+    color: white;
+    padding: 18px 30px;
+    border-radius: 20px; /* 🔥 zaobljene ivice */
+    font-size: 22px;
+    opacity: 0;
 
-    #adBox.show {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
+    backdrop-filter: blur(8px);
 
-    .highlight {
-        color: #00eaff;
-        font-weight: bold;
-    }
+    box-shadow:
+        0 0 20px rgba(0, 234, 255, 0.5),
+        0 0 40px rgba(0, 234, 255, 0.2);
+
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* kad se pojavi */
+#adBox.show {
+    right: 50px; /* ulazi u ekran */
+    opacity: 1;
+}
+
+/* glow tekst */
+.highlight {
+    color: #00eaff;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+}
+
+/* linija dole */
+.bar {
+    margin-top: 8px;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #00eaff);
+    border-radius: 10px;
+}
 </style>
 </head>
+
 <body>
 
 <div id="adBox">
     🔥 Support stream! <span class="highlight">Follow & Tap</span> 💙
+    <div class="bar"></div>
 </div>
 
 <script>
-    const ad = document.getElementById("adBox");
+const ad = document.getElementById("adBox");
 
-    function showAd() {
-        ad.classList.add("show");
+function showAd() {
+    ad.classList.add("show");
 
-        setTimeout(() => {
-            ad.classList.remove("show");
-        }, 5000); // koliko traje reklama (5 sekundi)
-    }
+    setTimeout(() => {
+        ad.classList.remove("show");
+    }, 5000);
+}
 
-    // koliko često se pojavljuje (na svakih 5 sekundi)
-    setInterval(showAd, 7000);
+// na svakih 40 sekundi
+setInterval(showAd, 7000);
 
-    // prvi put posle 5 sekundi
-    setTimeout(showAd, 5000);
+// prvi put brzo
+setTimeout(showAd, 3000);
 </script>
 
 </body>
